@@ -9,13 +9,13 @@ void tela_cadastrar_veiculo(void);
 void tela_pesquisar_veiculo(void);
 void tela_alterar_veiculo(void);
 void tela_excluir_veiculo(void);
-void visualizar_veiculo(void);
+void tela_visualizar_veiculo(void);
 // Modulo de clientes
 void tela_menu_cliente(void);
 void tela_cadastrar_cliente(void);
 void tela_editar_cliente(void);
 void tela_excluir_cliente(void);
-void visualizar_cliente(void);
+void tela_visualizar_cliente(void);
 // Modulo de vagas do estacionamento
 void tela_menu_vagas(void);
 void tela_criar_vaga(void);
@@ -25,21 +25,6 @@ void tela_excluir_vaga(void);
 // Programa principal
 int main(void) {
     tela_menu_principal();
-	tela_menu_veiculo();
-	tela_cadastrar_veiculo();
-	tela_pesquisar_veiculo();
-	tela_alterar_veiculo();
-	tela_excluir_veiculo();
-	visualizar_veiculo();
-	tela_menu_cliente();
-	tela_cadastrar_cliente();
-	tela_editar_cliente();
-	tela_excluir_cliente();
-	visualizar_cliente();
-	tela_menu_vagas();
-	tela_criar_vaga();
-	tela_editar_vaga();
-	tela_excluir_vaga();
     return 0;
 }
 
@@ -58,13 +43,23 @@ void tela_menu_principal(void) {
     printf("///            0. Sair                                                      ///\n");
     printf("///                                                                         ///\n");
     printf("///            Escolha a opcao desejada: ");
-    scanf("%c", &op);
+    scanf("%d", &op);
     getchar();
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t>>> Pressione <ENTER> para continuar...\n");
-    getchar();
+    switch(op){
+		case 1:
+			tela_menu_veiculo();
+        case 2:
+        	tela_menu_cliente();
+   		case 3: 
+        	tela_menu_vagas();	
+		case 0:
+			break;	
+		
+		default:
+			printf("Valor invalido, tente novamente!");	
+			tela_menu_principal();	
+        return 0;	
+	}
 }
 
 void tela_menu_veiculo(void) {
@@ -83,15 +78,28 @@ void tela_menu_veiculo(void) {
     printf("///            4. Excluir um veiculo do sistema                             ///\n");
     printf("///            0. Voltar ao menu anterior                                   ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Escolha a opÃ§Ã£o desejada: ");
-    scanf("%c", &op);
+    printf("///            Escolha a opcao desejada: ");
+    scanf("%d", &op);
     getchar();
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t>>> Pressione <ENTER> para continuar...\n");
-    getchar();
+    switch(op){
+		case 1:
+			tela_cadastrar_veiculo();
+		case 2:
+			tela_visualizar_veiculo();
+		case 3:
+			tela_alterar_veiculo();
+		case 4: 
+			tela_excluir_veiculo();
+		case 0:
+			tela_menu_principal();
+		default:
+			printf("Valor invalido, tente novamente!");
+			printf("\n");
+    		printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+    		getchar();
+			tela_menu_veiculo();	
+	}
+    
 }
 
 void tela_cadastrar_veiculo(void) {
@@ -116,7 +124,7 @@ void tela_cadastrar_veiculo(void) {
     getchar();
 }
 
-void visualizar_veiculo(void) {
+void tela_visualizar_veiculo(void) {
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -128,24 +136,6 @@ void visualizar_veiculo(void) {
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-}
-
-void tela_pesquisar_veiculo(void) {
-    system("clear||cls");
-    printf("\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("///                                                                         ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///            = = = = = = = Pesquisar Veiculo = = = = = = = =              ///\n");
-    printf("///            = = = = = = = = = = = = = = = = = = = = = = = =              ///\n");
-    printf("///                                                                         ///\n");
-    printf("///            Informe a placa do veiculo:                                  ///\n");
-    printf("///                                                                         ///\n");
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t>>> Pressione <ENTER> para continuar...\n");
     getchar();
 }
 
@@ -200,13 +190,27 @@ void tela_menu_cliente(void) {
     printf("///            0. Voltar ao menu anterior                                   ///\n");
     printf("///                                                                         ///\n");
     printf("///            Escolha a opção desejada: ");
-    scanf("%c", &op);
+    scanf("%d", &op);
     getchar();
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t>>> Pressione <ENTER> para continuar...\n");
-    getchar();
+    switch(op)
+	{
+	case 1:
+		tela_cadastrar_cliente();	 
+	case 2:		   
+		tela_editar_cliente();
+    case 3:
+    	tela_excluir_cliente();
+ 	case 4:
+ 		visualizar_cliente();
+    case 0:
+    	tela_menu_principal();
+	default:
+		printf("Valor invalido, tente novamente!");
+		printf("\n");
+    	printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+    	getchar();
+		tela_menu_cliente();
+	}
 }
 
 void tela_cadastrar_cliente(void) {
@@ -286,13 +290,25 @@ void tela_menu_vagas(void) {
     printf("///            0. Voltar ao menu anterior                                   ///\n");
     printf("///                                                                         ///\n");
     printf("///            Escolha a opção desejada: ");
-    scanf("%c", &op);
-    getchar();
-    printf("///                                                                         ///\n");
-    printf("///////////////////////////////////////////////////////////////////////////////\n");
-    printf("\n");
-    printf("\t\t>>> Pressione <ENTER> para continuar...\n");
-    getchar();
+    scanf("%d", &op);
+    switch(op)
+	{
+	case 1:
+		tela_criar_vaga();
+	case 2:
+		tela_editar_vaga();
+    case 3:
+    	tela_excluir_vaga();
+ 	case 0:
+ 		tela_menu_principal();
+	default:
+		printf("Valor invalido, tente novamente!");
+		printf("\n");
+    	printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+    	getchar();
+		tela_menu_vagas();
+	}
+    
 }
 
 void tela_criar_vaga(void) {
