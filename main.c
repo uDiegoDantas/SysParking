@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "telas_clientes.c"
-#include "telas_vagas.c"
-#include "telas_veiculos.c"
+#include "telas_clientes.h"
+#include "telas_vagas.h"
+#include "telas_veiculos.h"
 
 // Assinatura das funcoes
 void tela_menu_principal(void);
