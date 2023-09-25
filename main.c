@@ -4,7 +4,7 @@
 #include "telas_vagas.h"
 #include "telas_veiculos.h"
 
-// Assinatura das funcoes
+// Assinatura da tela do menu principal
 void tela_menu_principal(void);
 
 // Programa principal
@@ -13,7 +13,7 @@ int main(void) {
     return 0;
 }
 
-// Funcoes
+// Tela do menu principal
 void tela_menu_principal(void) {
     char op;
     system("clear||cls");
