@@ -22,7 +22,7 @@ void tela_menu_principal(void) {
     printf("///                                                                         ///\n");
     printf("///            = = = = =         SysParking        = = = = =                ///\n");
     printf("///                                                                         ///\n");
-    printf("///            1. Carros                                                    ///\n");
+    printf("///            1. Veiculos                                                  ///\n");
     printf("///            2. Clientes                                                  ///\n");
     printf("///            3. Vagas                                                     ///\n");
     printf("///            0. Sair                                                      ///\n");
