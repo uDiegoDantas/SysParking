@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "telas_vagas.h"
-#include "menu_principal.h"
+
 
 void tela_menu_vagas(void) {
     char op;
