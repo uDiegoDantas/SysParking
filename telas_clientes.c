@@ -36,7 +36,8 @@ void tela_menu_cliente(void) {
  		visualizar_cliente();
         break;
     case '0':
-    	tela_menu_principal();
+        tela_menu_principal();
+    	break;
 	default:
 		printf("Valor invalido, tente novamente!");
 		printf("\n");

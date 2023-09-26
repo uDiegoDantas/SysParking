@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "telas_clientes.h"
-#include "telas_vagas.h"
-#include "telas_veiculos.h"
+#include "telas_clientes.c"
+#include "telas_vagas.c"
+#include "telas_veiculos.c"
+#include "telas_info.c"
 
 // Assinatura da tela do menu principal
 void tela_menu_principal(void);
@@ -25,6 +26,7 @@ void tela_menu_principal(void) {
     printf("///            1. Veiculos                                                  ///\n");
     printf("///            2. Clientes                                                  ///\n");
     printf("///            3. Vagas                                                     ///\n");
+    printf("///            4. Informações                                               ///\n");
     printf("///            0. Sair                                                      ///\n");
     printf("///                                                                         ///\n");
     printf("///            Escolha a opcao desejada: ");
@@ -39,6 +41,9 @@ void tela_menu_principal(void) {
             break;  
         case '3':
             tela_menu_vagas();
+            break;  
+        case '4':
+            tela_menu_info();
             break;  
         case '0':
             exit(0);  

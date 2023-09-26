@@ -36,7 +36,7 @@ void tela_menu_veiculos(void) {
 			tela_excluir_veiculo();
             break;
 		case '0':
-			tela_menu_principal();
+            tela_menu_principal();
             break;
 		default:
 			printf("Valor invalido, tente novamente!");

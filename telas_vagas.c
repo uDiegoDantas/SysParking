@@ -31,7 +31,6 @@ void tela_menu_vagas(void) {
             break;
         case '0':
             tela_menu_principal();
-            break;
         default:
             printf("Valor invalido, tente novamente!");
             printf("\n");
