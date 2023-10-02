@@ -23,30 +23,27 @@ void tela_menu_veiculos(void) {
     scanf("%c", &op);
     getchar();
     switch(op){
-		case '1':
-			tela_cadastrar_veiculo();
+        case '1':
+            tela_cadastrar_veiculo();
             break;
-		case '2':
-			tela_visualizar_veiculo();
+        case '2':
+            tela_visualizar_veiculo();
             break;
-		case '3':
-			tela_alterar_veiculo();
+        case '3':
+            tela_alterar_veiculo();
             break;
-		case '4': 
-			tela_excluir_veiculo();
+        case '4': 
+            tela_excluir_veiculo();
             break;
-		case '0':
-            tela_menu_principal();
+        case '0':
             break;
-		default:
-			printf("Valor invalido, tente novamente!");
-			printf("\n");
-    		printf("\t\t>>> Tecle <ENTER> para continuar...\n");
-    		getchar();
-			tela_menu_veiculos();	
-        
-	}
-    
+        default:
+            printf("Valor invalido, tente novamente!");
+            printf("\n");
+            printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+            getchar();	
+	}    
+    return;     
 }
 
 void tela_cadastrar_veiculo(void) {
@@ -62,7 +59,7 @@ void tela_cadastrar_veiculo(void) {
     printf("///            Codigo do proprietario:                                      ///\n");
     printf("///            Tipo do veiculo:                                             ///\n");
     printf("///            Cor do veiculo:                                              ///\n");
-    printf("///            Ano do veiculo (dd/mm/aaaa):                                 ///\n");
+    printf("///            Ano do veiculo (aaaa):                                 ///\n");
     printf("///                                                                         ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");

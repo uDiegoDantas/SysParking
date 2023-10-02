@@ -4,6 +4,7 @@
 
 void tela_menu_info(void){
     char op;
+
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -17,6 +18,7 @@ void tela_menu_info(void){
     printf("///            Escolha a opção desejada: "); 
     scanf("%c", &op);
     getchar();
+
     switch(op){
         case '1':
 
@@ -32,13 +34,12 @@ void tela_menu_info(void){
     		getchar();
 			tela_menu_info();
         case '0':
-            tela_menu_principal();
-            break;
+            return;
         default:
 			printf("Valor invalido, tente novamente!");
 			printf("\n");
     		printf("\t\t>>> Tecle <ENTER> para continuar...\n");
     		getchar();
-			tela_menu_info();
     }
+    
 }

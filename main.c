@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
+
 #include "telas_clientes.h"
 #include "telas_vagas.h"
 #include "telas_veiculos.h"
@@ -8,15 +10,8 @@
 // Assinatura da tela do menu principal
 void tela_menu_principal(void);
 
-// Programa principal
-int main(void) {
-    tela_menu_principal();
-    return 0;
-}
-
 // Tela do menu principal
 void tela_menu_principal(void) {
-    char op;
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -29,10 +24,24 @@ void tela_menu_principal(void) {
     printf("///            4. Informações                                               ///\n");
     printf("///            0. Sair                                                      ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Escolha a opcao desejada: ");
-    scanf("%c", &op);
-    getchar();
-    switch (op) {
+    
+    return;
+}
+
+// Programa principal
+int main(void) {
+
+    setlocale(LC_ALL,"Portuguese");
+    char op;
+    
+    do {
+
+        tela_menu_principal();
+        printf("///            Escolha a opcao desejada: ");
+        scanf("%c", &op);
+        getchar();
+    
+        switch(op) {
         case '1':
             tela_menu_veiculos();
             break;  
@@ -48,8 +57,11 @@ void tela_menu_principal(void) {
         case '0':
             exit(0);  
         default:
-            printf("Valor inválido, tente novamente!");
-            tela_menu_principal();
-    }
-}
+            printf("Valor inválido, tente novamente!\n");
+            printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+    		getchar();
+        }
+    }while(op != '0');
 
+    return 0;
+}

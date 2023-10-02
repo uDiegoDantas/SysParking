@@ -5,6 +5,7 @@
 
 void tela_menu_vagas(void) {
     char op;
+    
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -19,6 +20,7 @@ void tela_menu_vagas(void) {
     printf("///            Escolha a opção desejada: "); 
     scanf("%c", &op);
     getchar();
+
     switch(op){
         case '1':
             tela_criar_vaga();
@@ -30,15 +32,13 @@ void tela_menu_vagas(void) {
             tela_excluir_vaga();
             break;
         case '0':
-            tela_menu_principal();
+            return;
         default:
             printf("Valor invalido, tente novamente!");
             printf("\n");
             printf("\t\t>>> Tecle <ENTER> para continuar...\n");
             getchar();
-            tela_menu_vagas();
 	}
-    
 }
 
 void tela_criar_vaga(void) {
