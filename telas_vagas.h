@@ -3,3 +3,4 @@ void tela_menu_vagas(void);
 void tela_criar_vaga(void);
 void tela_editar_vaga(void);
 void tela_excluir_vaga(void);
+void mapa_vagas(void);

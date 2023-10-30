@@ -4,3 +4,4 @@ void tela_cadastrar_veiculo(void);
 void tela_visualizar_veiculo(void);
 void tela_alterar_veiculo(void);
 void tela_excluir_veiculo(void);
+void listar_veiculos(void);

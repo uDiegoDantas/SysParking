@@ -6,6 +6,7 @@
 #include "telas_vagas.h"
 #include "telas_veiculos.h"
 #include "telas_info.h"
+#include "telas_servicos.h"
 
 // Assinatura da tela do menu principal
 void tela_menu_principal(void);
@@ -21,10 +22,11 @@ void tela_menu_principal(void) {
     printf("///            1. Veiculos                                                  ///\n");
     printf("///            2. Clientes                                                  ///\n");
     printf("///            3. Vagas                                                     ///\n");
-    printf("///            4. Informações                                               ///\n");
+    printf("///            4. Servicos                                                  ///\n");
+    printf("///            5. Informacoes                                               ///\n");
     printf("///            0. Sair                                                      ///\n");
     printf("///                                                                         ///\n");
-    
+    printf("///////////////////////////////////////////////////////////////////////////////\n\n");
     return;
 }
 
@@ -35,9 +37,8 @@ int main(void) {
     char op;
     
     do {
-
         tela_menu_principal();
-        printf("///            Escolha a opcao desejada: ");
+        printf("               Escolha a opcao desejada: ");
         scanf("%c", &op);
         getchar();
     
@@ -52,16 +53,18 @@ int main(void) {
             tela_menu_vagas();
             break;  
         case '4':
+            tela_menu_servicos();
+            break;  
+        case '5':
             tela_menu_info();
             break;  
         case '0':
             exit(0);  
         default:
-            printf("Valor inválido, tente novamente!\n");
+            printf("Valor invalido, tente novamente!\n");
             printf("\t\t>>> Tecle <ENTER> para continuar...\n");
     		getchar();
         }
     }while(op != '0');
-
     return 0;
 }

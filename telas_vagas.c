@@ -15,9 +15,12 @@ void tela_menu_vagas(void) {
     printf("///            1. Criar uma nova vaga                                       ///\n");
     printf("///            2. Editar vaga existente                                     ///\n");
     printf("///            3. Excluir vaga                                              ///\n");
+    printf("///            4. Visualizar mapa de vagas                                  ///\n");
     printf("///            0. Voltar ao menu anterior                                   ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Escolha a opção desejada: "); 
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("               Escolha a opcao desejada: "); 
     scanf("%c", &op);
     getchar();
 
@@ -30,6 +33,9 @@ void tela_menu_vagas(void) {
             break;
         case '3':
             tela_excluir_vaga();
+            break;
+        case '4':
+            mapa_vagas();
             break;
         case '0':
             return;
@@ -48,7 +54,7 @@ void tela_criar_vaga(void) {
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = Criar Vaga = = = = = = = =                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe o número da vaga:                                    ///\n");
+    printf("///            Informe o numero da vaga:                                    ///\n");
     printf("///            Tipo da vaga (carro, moto, etc.):                            ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -56,7 +62,7 @@ void tela_criar_vaga(void) {
     printf("A opcao esta em criacao ou manutencao, tente novamente mais tarde!\n");
     printf("\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    tela_menu_vagas();
+    return;
 }
 
 void tela_editar_vaga(void) {
@@ -66,14 +72,14 @@ void tela_editar_vaga(void) {
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = Editar Vaga = = = = = = = =                ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe o número da vaga a ser editada:                      ///\n");
+    printf("///            Informe o numero da vaga a ser editada:                      ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("A opcao esta em criacao ou manutencao, tente novamente mais tarde!\n");
     printf("\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    tela_menu_vagas();
+    return;
 }
 
 void tela_excluir_vaga(void) {
@@ -83,12 +89,27 @@ void tela_excluir_vaga(void) {
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = Excluir Vaga = = = = = = = =               ///\n");
     printf("///                                                                         ///\n");
-    printf("///            Informe o número da vaga a ser excluída:                     ///\n");
+    printf("///            Informe o numero da vaga a ser excluída:                     ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
     printf("A opcao esta em criacao ou manutencao, tente novamente mais tarde!\n");
     printf("\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
-    tela_menu_vagas();
+    return;
+}
+
+void mapa_vagas(void){
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                         ///\n");
+    printf("///            = = = = = = = =  Mapa das Vagas = = = = = = = =              ///\n");
+    printf("///                                                                         ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf("A opcao esta em criacao ou manutencao, tente novamente mais tarde!\n");
+    printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    return;
 }
