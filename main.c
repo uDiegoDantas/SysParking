@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <locale.h>
 
-#include "telas_clientes.h"
-#include "telas_vagas.h"
-#include "telas_veiculos.h"
-#include "telas_info.h"
-#include "telas_servicos.h"
+#include "telas_clientes.c"
+#include "telas_vagas.c"
+#include "telas_veiculos.c"
+#include "telas_info.c"
+#include "telas_servicos.c"
 
 // Assinatura da tela do menu principal
 void tela_menu_principal(void);
@@ -27,7 +27,7 @@ void tela_menu_principal(void) {
     printf("///            0. Sair                                                      ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n\n");
-    return;
+    
 }
 
 // Programa principal
@@ -62,6 +62,7 @@ int main(void) {
             exit(0);  
         default:
             printf("Valor invalido, tente novamente!\n");
+
             printf("\t\t>>> Tecle <ENTER> para continuar...\n");
     		getchar();
         }
