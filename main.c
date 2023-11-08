@@ -27,7 +27,7 @@ void tela_menu_principal(void) {
     printf("///            0. Sair                                                      ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n\n");
-    
+    return;
 }
 
 // Programa principal
@@ -62,7 +62,6 @@ int main(void) {
             exit(0);  
         default:
             printf("Valor invalido, tente novamente!\n");
-
             printf("\t\t>>> Tecle <ENTER> para continuar...\n");
     		getchar();
         }

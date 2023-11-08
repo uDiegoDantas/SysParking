@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "verificadores.h"
 
+//O uso dos principais verificadores está instavel no programa principal, por isso não está em uso
+
 int verifica_cpf(const char *cpf){
     if (strlen(cpf) != 11)
         return 0;

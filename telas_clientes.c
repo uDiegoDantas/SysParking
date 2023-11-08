@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "telas_clientes.h"
 
 void tela_menu_cliente(void) {
@@ -22,7 +21,7 @@ void tela_menu_cliente(void) {
     printf("\n");
     printf("               Escolha a opcao desejada: ");        
     scanf("%c", &op);
-    getchar();
+    system("pause >nul");
     
     switch(op) {
         case '1':
@@ -45,9 +44,8 @@ void tela_menu_cliente(void) {
         default:
             printf("Valor invalido, tente novamente!");
             printf("\n");
-            
             printf(">>> Tecle <ENTER> para continuar...\n");
-            getchar();
+            system("pause >nul");
     }
    
 }
@@ -81,12 +79,9 @@ void tela_cadastrar_cliente(void) {
 
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
-        
-        getchar();
         printf(">>> Tecle <ENTER> para continuar...\n");
-        getchar();
+        system("pause >nul");
 
-        return;
     }
 
     fwrite(&cliente, sizeof(struct Cliente), 1, arquivo);
@@ -94,11 +89,8 @@ void tela_cadastrar_cliente(void) {
     fclose(arquivo);
 
     printf("Cliente cadastrado com sucesso!\n");
-
-    getchar();
     printf("\t\t>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-
+    system("pause >nul");
     return;
 }
 
@@ -118,11 +110,8 @@ void tela_editar_cliente(void) {
     
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
-
-        getchar();
         printf(">>> Tecle <ENTER> para continuar...\n");
-        getchar();
-
+        system("pause >nul");
         return;
     }
     
@@ -143,7 +132,6 @@ void tela_editar_cliente(void) {
             scanf("%s", cliente.cpf);
             printf("///     Novo Telefone: ");
             scanf("%s", cliente.telefone);
-            getchar();
             printf("///\n");
             printf("///////////////////////////////////////////////////////////////////////////////\n");
             printf("\n");
@@ -156,16 +144,13 @@ void tela_editar_cliente(void) {
     }
     
     if (!encontrado) {
-        printf("Cliente nao encontrado.\n");
-        return;
+        printf("Cliente com o CPF %s nao encontrado.\n", cpf);
     }
     
     fclose(arquivo);
     
-    printf("CLiente editado com sucesso!");
     printf(">>> Tecle <ENTER> para continuar...\n");
-    getchar();
-
+    system("pause >nul");
     return;
 }
 
@@ -179,7 +164,6 @@ void tela_excluir_cliente(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do cliente a ser excluido: ");
     scanf("%s", cpf);
-    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
@@ -189,8 +173,7 @@ void tela_excluir_cliente(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf(">>> Tecle <ENTER> para continuar...\n");
-        getchar();
-
+        system("pause >nul");
         return;
     }
     
@@ -201,16 +184,14 @@ void tela_excluir_cliente(void) {
     if (temp == NULL) {
         printf("Erro ao criar o arquivo temporario.\n");
         fclose(arquivo);
-
         printf(">>> Tecle <ENTER> para continuar...\n");
-        getchar();
-
+        system("pause >nul");
         return;
     }
     
     while (fread(&cliente, sizeof(struct Cliente), 1, arquivo) == 1) {
         if (strcmp(cpf, cliente.cpf) == 0) {
-            printf("Cliente excluido com sucesso!.\n");
+            printf("Cliente excluido com sucesso!.\n", cpf);
             encontrado = 1;
         } else {
 
@@ -229,8 +210,7 @@ void tela_excluir_cliente(void) {
     rename("temp.dat", "clientes.dat");
     
     printf(">>> Tecle <ENTER> para continuar...\n");
-    getchar();
-
+    system("pause >nul");
     return;
 }
 
@@ -244,7 +224,6 @@ void visualizar_cliente(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do cliente a ser visualizado: ");
     scanf("%s", cpf);
-    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
@@ -253,10 +232,8 @@ void visualizar_cliente(void) {
 
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
-        
         printf(">>> Tecle <ENTER> para continuar...\n");
-        getchar();
-
+        system("pause >nul");
         return;
     }
 
@@ -275,14 +252,13 @@ void visualizar_cliente(void) {
     }
 
     if (!encontrado) {
-        printf("Cliente nao encontrado.\n");
+        printf("Cliente nao encontrado.\n", cpf);
     }
 
     fclose(arquivo);
 
     printf("\n>>> Tecle <ENTER> para continuar...\n");
-    getchar();
-
+    system("pause >nul");
     return;
 }
 
@@ -300,9 +276,8 @@ void listar_clientes(void) {
 
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
-        getchar();
         printf(">>> Tecle <ENTER> para continuar...\n");
-        getchar();
+        system("pause >nul");
         return;
     }
 
@@ -322,7 +297,6 @@ void listar_clientes(void) {
     fclose(arquivo);
 
     printf(">>> Tecle <ENTER> para continuar...\n");
-    getchar();
-    
+    system("pause >nul");
 }
 
