@@ -54,6 +54,13 @@ void tela_menu_servicos(void){
     
 }
 
+struct Veiculos{
+    char placa[10];
+    char proprietario[50];
+    char ano[4];
+    char porte[20];
+};
+
 struct Servicos{
     char placa[10];
     char codigo[3];
@@ -63,10 +70,21 @@ struct Servicos{
     char nomeCliente[50];
 };
 
+struct Clientes {
+    char nome[50];
+    char cpf[12];
+    char telefone[15];
+};
+
+struct Vagas{
+    char codigo[3]; // Uma letra seguida de um numero de 0 a 15
+    char tipo[20];
+};
+
 void tela_checkin(void){
 
     struct Servicos servico;
-
+    
     system("clear||cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -87,16 +105,16 @@ void tela_checkin(void){
         getchar();
         return;
     }
+    
+    struct Veiculos veiculo;
 
-    struct Veiculo veiculo;
-
-    while (fread(&veiculo, sizeof(struct Veiculo), 1, arquivo_veiculos) == 1 ) {
+    while (fread(&veiculo, sizeof(struct Veiculos), 1, arquivo_veiculos) == 1 ) {
         if (strcmp(servico.placa, veiculo.placa) == 0) {
         teste_veiculo = 1;
         break;
         }
     }
-
+    
     // Se o veículo não foi encontrado, exibe uma mensagem de erro
     if (!teste_veiculo) {
         printf("Veiculo nao encontrado ou ja esta cadastrado um algum check-in!.\n");
@@ -123,9 +141,9 @@ void tela_checkin(void){
         return;
     }
 
-    struct Vaga vaga;
+    struct Vagas vaga;
 
-    while (fread(&vaga, sizeof(struct Vaga), 1, arquivo_vagas) == 1) {
+    while (fread(&vaga, sizeof(struct Vagas), 1, arquivo_vagas) == 1) {
     
         // Verificar se a vaga existe
         if (strcmp(vaga.codigo, servico.codigo) == 0) {
@@ -160,9 +178,9 @@ void tela_checkin(void){
         return;    
     } 
 
-    struct Cliente cliente;
+    struct Clientes cliente;
 
-    while(fread(&cliente, sizeof(struct Cliente), 1, arquivo_clientes) == 1){
+    while(fread(&cliente, sizeof(struct Clientes), 1, arquivo_clientes) == 1){
 
         //Verifica se o CPF indicado existe
         if(strcmp(cliente.cpf, servico.cpf) == 0){
