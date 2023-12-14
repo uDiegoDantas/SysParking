@@ -4,6 +4,7 @@
 #include <time.h>
 
 #include "telas_servicos.h"
+#include "telas_clientes.h"
 #include "telas_veiculos.h"
 #include "telas_vagas.h"
 
