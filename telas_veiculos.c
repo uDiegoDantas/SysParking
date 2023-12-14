@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "telas_veiculos.h"
 
 void tela_menu_veiculos(void) {
@@ -23,7 +24,8 @@ void tela_menu_veiculos(void) {
     printf("\n");
     printf("               Escolha a opcao desejada: ");
     scanf("%c", &op);
-    system("pause >nul");
+    getchar();
+
     switch(op){
         case '1':
             tela_cadastrar_veiculo();
@@ -46,7 +48,8 @@ void tela_menu_veiculos(void) {
             printf("Valor invalido, tente novamente!");
             printf("\n");
             printf("\t\t>>> Tecle <ENTER> para continuar...\n");
-            system("pause >nul");	
+            getchar();
+
 	}    
     return;     
 }
@@ -72,12 +75,16 @@ void tela_cadastrar_veiculo(void) {
     printf("///                                                                         ///\n");
     printf("///            Placa: ");
     scanf("%s", placa);
+    getchar();
     printf("///            Proprietario: ");
     scanf("%s", proprietario);
+    getchar();
     printf("///            Ano do veiculo (aaaa): ");
     scanf("%d", &ano);
+    getchar();
     printf("///            Porte(Carro, moto, etc): ");
     scanf("%s", porte);
+    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
@@ -87,7 +94,7 @@ void tela_cadastrar_veiculo(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf("\t\t>>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
         return;
     }
 
@@ -95,7 +102,7 @@ void tela_cadastrar_veiculo(void) {
 
     strcpy(veiculo.placa, placa);
     strcpy(veiculo.proprietario, proprietario);
-    veiculo.ano = ano;
+    strcpy(veiculo.ano, ano);
     strcpy(veiculo.porte, porte);
 
     fwrite(&veiculo, sizeof(struct Veiculo), 1, arquivo);
@@ -104,7 +111,8 @@ void tela_cadastrar_veiculo(void) {
 
     printf("Veiculo cadastrado com sucesso!\n");
     printf("\t\t>>> Tecle <ENTER> para continuar...\n");
-    system("pause >nul");
+    getchar();
+
     return;
 }
 
@@ -118,6 +126,7 @@ void tela_visualizar_veiculo(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe a placa do veiculo a ser visualizado: ");
     scanf("%s", placa);
+    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     
@@ -127,7 +136,7 @@ void tela_visualizar_veiculo(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
         return;
     }
 
@@ -160,7 +169,8 @@ void tela_visualizar_veiculo(void) {
     fclose(arquivo);
 
     printf(">>> Tecle <ENTER> para continuar...\n");
-    system("pause >nul");
+    getchar();
+
     return;
 }
 
@@ -175,6 +185,7 @@ void tela_alterar_veiculo(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe a placa do veiculo: ");
     scanf("%s", placa);
+    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
@@ -185,7 +196,8 @@ void tela_alterar_veiculo(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
+
         return;
     }
 
@@ -206,12 +218,16 @@ void tela_alterar_veiculo(void) {
             printf("///\n");
             printf("///     Nova Placa: ");
             scanf("%s", veiculo.placa);
+            getchar();
             printf("///     Novo Proprietario: ");
             scanf("%s", veiculo.proprietario);
+            getchar();
             printf("///     Novo Ano: ");
             scanf("%d", &veiculo.ano);
+            getchar();
             printf("///     Novo Porte: ");
             scanf("%s", veiculo.porte);
+            getchar();
             printf("///                                                                         ///\n");
             printf("///////////////////////////////////////////////////////////////////////////////\n");
             printf("\n");
@@ -230,7 +246,8 @@ void tela_alterar_veiculo(void) {
     fclose(arquivo);
 
     printf(">>> Tecle <ENTER> para continuar...\n");
-    system("pause >nul");
+    getchar();
+
     return;
 }
 
@@ -245,6 +262,7 @@ void tela_excluir_veiculo(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe a placa do veiculo que deseja excluir: ");
     scanf("%s", placa);
+    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
@@ -254,7 +272,8 @@ void tela_excluir_veiculo(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
+
         return;
     }
 
@@ -266,7 +285,7 @@ void tela_excluir_veiculo(void) {
         printf("Erro ao criar o arquivo temporário.\n");
         fclose(arquivo);
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
         return;
     }
 
@@ -290,7 +309,8 @@ void tela_excluir_veiculo(void) {
     rename("temp_veiculos.dat", "veiculos.dat");
 
     printf(">>> Tecle <ENTER> para continuar...\n");
-    system("pause >nul");
+    getchar();
+
     return;
 }
 
@@ -309,7 +329,8 @@ void listar_veiculos(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
+
         return;
     }
 
@@ -330,6 +351,7 @@ void listar_veiculos(void) {
     fclose(arquivo);
 
     printf(">>> Tecle <ENTER> para continuar...\n");
-    system("pause >nul");
+    getchar();
+
     return;
 }

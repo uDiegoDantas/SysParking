@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "telas_clientes.h"
 
 void tela_menu_cliente(void) {
@@ -21,7 +22,7 @@ void tela_menu_cliente(void) {
     printf("\n");
     printf("               Escolha a opcao desejada: ");        
     scanf("%c", &op);
-    system("pause >nul");
+    getchar();
     
     switch(op) {
         case '1':
@@ -45,7 +46,7 @@ void tela_menu_cliente(void) {
             printf("Valor invalido, tente novamente!");
             printf("\n");
             printf(">>> Tecle <ENTER> para continuar...\n");
-            system("pause >nul");
+            getchar();
     }
    
 }
@@ -67,10 +68,13 @@ void tela_cadastrar_cliente(void) {
     printf("///                                                                         ///\n");
     printf("///            Nome: ");
     scanf("%s", cliente.nome);
+    getchar();
     printf("///            CPF: ");
     scanf("%s", cliente.cpf);
+    getchar();
     printf("///            Telefone: ");
     scanf("%s", cliente.telefone);
+    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
@@ -80,7 +84,7 @@ void tela_cadastrar_cliente(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
 
     }
 
@@ -90,7 +94,7 @@ void tela_cadastrar_cliente(void) {
 
     printf("Cliente cadastrado com sucesso!\n");
     printf("\t\t>>> Tecle <ENTER> para continuar...\n");
-    system("pause >nul");
+    getchar();
     return;
 }
 
@@ -104,6 +108,7 @@ void tela_editar_cliente(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do cliente a ser editado: ");
     scanf("%s", cpf);
+    getchar();
     printf("///\n");
 
     FILE *arquivo = fopen("clientes.dat", "r+b");
@@ -111,7 +116,7 @@ void tela_editar_cliente(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
         return;
     }
     
@@ -128,10 +133,13 @@ void tela_editar_cliente(void) {
             printf("///\n");        
             printf("///     Novo Nome: ");
             scanf("%s", cliente.nome);
+            getchar();
             printf("///     Novo CPF: ");
             scanf("%s", cliente.cpf);
+            getchar();
             printf("///     Novo Telefone: ");
             scanf("%s", cliente.telefone);
+            getchar();
             printf("///\n");
             printf("///////////////////////////////////////////////////////////////////////////////\n");
             printf("\n");
@@ -150,7 +158,7 @@ void tela_editar_cliente(void) {
     fclose(arquivo);
     
     printf(">>> Tecle <ENTER> para continuar...\n");
-    system("pause >nul");
+    getchar();
     return;
 }
 
@@ -164,6 +172,7 @@ void tela_excluir_cliente(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do cliente a ser excluido: ");
     scanf("%s", cpf);
+    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
@@ -173,7 +182,7 @@ void tela_excluir_cliente(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
         return;
     }
     
@@ -185,13 +194,13 @@ void tela_excluir_cliente(void) {
         printf("Erro ao criar o arquivo temporario.\n");
         fclose(arquivo);
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
         return;
     }
     
     while (fread(&cliente, sizeof(struct Cliente), 1, arquivo) == 1) {
         if (strcmp(cpf, cliente.cpf) == 0) {
-            printf("Cliente excluido com sucesso!.\n", cpf);
+            printf("Cliente excluido com sucesso!.\n");
             encontrado = 1;
         } else {
 
@@ -210,7 +219,7 @@ void tela_excluir_cliente(void) {
     rename("temp.dat", "clientes.dat");
     
     printf(">>> Tecle <ENTER> para continuar...\n");
-    system("pause >nul");
+    getchar();
     return;
 }
 
@@ -224,6 +233,8 @@ void visualizar_cliente(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe o CPF do cliente a ser visualizado: ");
     scanf("%s", cpf);
+    getchar();
+    getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("\n");
@@ -233,7 +244,7 @@ void visualizar_cliente(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
         return;
     }
 
@@ -252,13 +263,15 @@ void visualizar_cliente(void) {
     }
 
     if (!encontrado) {
-        printf("Cliente nao encontrado.\n", cpf);
+        printf("Cliente nao encontrado.\n");printf(">>> Tecle <ENTER> para continuar...\n");
+        getchar();
+        return;
     }
 
     fclose(arquivo);
 
     printf("\n>>> Tecle <ENTER> para continuar...\n");
-    system("pause >nul");
+    getchar();
     return;
 }
 
@@ -277,7 +290,7 @@ void listar_clientes(void) {
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         printf(">>> Tecle <ENTER> para continuar...\n");
-        system("pause >nul");
+        getchar();
         return;
     }
 
@@ -297,6 +310,7 @@ void listar_clientes(void) {
     fclose(arquivo);
 
     printf(">>> Tecle <ENTER> para continuar...\n");
-    system("pause >nul");
+    getchar();
+    return;
 }
 

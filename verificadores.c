@@ -2,96 +2,60 @@
 #include <stdlib.h>
 #include "verificadores.h"
 
-//O uso dos principais verificadores está instavel no programa principal, por isso não está em uso
+#include "telas_clientes.h"
+#include "telas_vagas.h"
+#include "telas_veiculos.h"
+#include "telas_info.h"
+#include "telas_servicos.h"
 
-int verifica_cpf(const char *cpf){
+//O uso doe alguns verificadores está instavel no programa principal, por isso não está em uso
+int existeCheckin(const char *placa, const char *codigo, const char *cpf) {
+    FILE *arquivo_servicos = fopen("servicos.dat", "rb");
+
+    if (arquivo_servicos == NULL) {
+        return 0;
+    }
+
+    struct Servicos servico;
+    while (fread(&servico, sizeof(struct Servicos), 1, arquivo_servicos) == 1) {
+        if (strcmp(placa, servico.placa) == 0 || strcmp(codigo, servico.codigo) == 0 || strcmp(cpf, servico.cpf) == 0) {
+            fclose(arquivo_servicos);
+            return 1; // Já existe um check-in com esses dados
+        }
+    }
+
+    fclose(arquivo_servicos);
+    return 0; // Não encontrou um check-in com esses dados
+}
+
+int verificarCPF(char *cpf) {
+    int i, j, digito1 = 0, digito2 = 0;
+
     if (strlen(cpf) != 11)
         return 0;
-
-    for (int i = 0; i < 11; i++) {
-        if (cpf[i] < '0' || cpf[i] > '9')
+    else if ((strcmp(cpf, "00000000000") == 0) || (strcmp(cpf, "11111111111") == 0) || (strcmp(cpf, "22222222222") == 0) || (strcmp(cpf, "33333333333") == 0) || (strcmp(cpf, "44444444444") == 0) || (strcmp(cpf, "55555555555") == 0) || (strcmp(cpf, "66666666666") == 0) || (strcmp(cpf, "77777777777") == 0) || (strcmp(cpf, "88888888888") == 0) || (strcmp(cpf, "99999999999") == 0))
+        return 0;
+    else {
+        for (i = 0, j = 10; i < strlen(cpf) - 2; i++, j--)
+            digito1 += (cpf[i] - '0') * j;
+        digito1 %= 11;
+        if (digito1 < 2)
+            digito1 = 0;
+        else
+            digito1 = 11 - digito1;
+        if ((cpf[9] - '0') != digito1)
             return 0;
+        else {
+            for (i = 0, j = 11; i < strlen(cpf) - 1; i++, j--)
+                digito2 += (cpf[i] - '0') * j;
+            digito2 %= 11;
+            if (digito2 < 2)
+                digito2 = 0;
+            else
+                digito2 = 11 - digito2;
+            if ((cpf[10] - '0') != digito2)
+                return 0;
+        }
     }
-
-    int soma = 0;
-    int digito1, digito2;
-
-    // Calcula o primeiro dígito verificador
-    for (int i = 0, j = 10; i < 9; i++, j--) {
-        soma += (cpf[i] - '0') * j;
-    }
-    digito1 = 11 - (soma % 11);
-    if (digito1 >= 10)
-        digito1 = 0;
-
-    if (cpf[9] - '0' != digito1)
-        return 0;
-
-    soma = 0;
-
-    // Calcula o segundo dígito verificador
-    for (int i = 0, j = 11; i < 10; i++, j--) {
-        soma += (cpf[i] - '0') * j;
-    }
-    digito2 = 11 - (soma % 11);
-    if (digito2 >= 10)
-        digito2 = 0;
-
-    if (cpf[10] - '0' != digito2)
-        return 0;
-
     return 1;
-}
-
-//Verificador de nome
-bool verifica_nome(char nome[]) {
-    for (int i = 0; nome[i] != '\0'; i++) {
-        if (!isalpha(nome[i]) && nome[i] != ' ') {
-            return false;
-        }
-    }
-    return true;
-}
-
-//Verificador de telefone
-bool verifica_telefone(char telefone[]) {
-    for (int i = 0; telefone[i] != '\0'; i++) {
-        if (!isdigit(telefone[i]) && telefone[i] != ' ') {
-            return false;
-        }
-    }
-    return true;
-}
-
-//Verificador de placa de veículo
-int verifica_placa(const char *placa) {
-    if (placa == NULL)
-        return 0;
-
-    for (int i = 0; placa[i] != '\0'; i++) {
-        if (!isalnum((unsigned char)placa[i])) {
-            return 0; // Se encontrar um caractere que não é alfanumérico, retorna falso
-        }
-    }
-
-    return 1; // Se passou pelo loop sem encontrar caracteres inválidos, retorna verdadeiro
-}
-
-//Verificar o ano do carro 
-int verifica_ano_carro(int anoCarro) {
-    // Obtém o ano atual
-    time_t t;
-    struct tm *agora;
-    t = time(NULL);
-    agora = localtime(&t);
-    int anoAtual = agora->tm_year + 1900;
-
-    // Define um ano mínimo (1886, quando o primeiro carro foi fabricado)
-    int anoMinimo = 1886;
-
-    if (anoCarro >= anoMinimo && anoCarro <= anoAtual) {
-        return 1; // Ano do carro válido
-    } else {
-        return 0; // Ano do carro inválido
-    }
 }

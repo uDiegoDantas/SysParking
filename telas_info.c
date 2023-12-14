@@ -26,10 +26,7 @@ void tela_menu_info(void){
             tela_sobre();
 			break;
         case '2':
-            printf("Função em desenvolvimento, tente novamente mais tarde!");
-            printf("\n");
-    		printf("\t\t>>> Tecle <ENTER> para continuar...\n");
-    		getchar();
+            tela_ajuda();
 			break;
         case '0':
             return;
@@ -45,7 +42,7 @@ void tela_menu_info(void){
 
 void tela_sobre(void){
 
-    system("clear||cls");
+    system("clear || cls");
     printf("\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
     printf("///                                                                         ///\n");
@@ -70,4 +67,32 @@ void tela_sobre(void){
     printf("\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
     return;
+}
+
+void tela_ajuda(void){
+
+    system("clear || cls");
+    printf("\n");
+    printf("////////////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                              ///\n");
+    printf("///                  = = = = = = =  Instrucoes de uso = = = = = = =              ///\n");
+    printf("///                                                                              ///\n");
+    printf("///  1 - Ao iniciar o programa, voce sera apresentado ao Menu Principal. Este    ///\n");
+    printf("///  menu oferece opcoes para acessar diferentes funcionalidades do sistema.     ///\n");
+    printf("///                                                                              ///\n");
+    printf("///  2 - Escolha da Opcao:                                                       ///\n");
+    printf("///     Insira o numero correspondente a opcao desejada e pressione Enter.       ///\n");
+    printf("///  Caso seja necessario inserir informacoes, siga as instrucoes na tela.       ///\n");
+    printf("///                                                                              ///\n");
+    printf("///  3 - Navegacao:                                                              ///\n");
+    printf("///     Apos completar uma operacao, o programa geralmente retornara ao Menu     ///\n");
+    printf("///  anterior ou solicitara a proxima acao.                                      ///\n");
+    printf("///                                                                              ///\n");
+    printf("////////////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+
+    printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    return;
+
 }

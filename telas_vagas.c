@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "telas_vagas.h"
 
-struct Vaga {
+struct Vaga{
     char codigo[3]; // Uma letra seguida de um numero de 0 a 15
     char tipo[20];
 };
@@ -58,9 +58,10 @@ void tela_criar_vaga(void) {
     printf("///                                                                         ///\n");
     printf("///            = = = = = = = = = Criar Vaga = = = = = = = =                 ///\n");
     printf("///                                                                         ///\n");
-    printf("///           Informe o codigo da vaga (letra + numero de 0 a 15, ex: A7):  ///\n");
+    printf("///           Informe o codigo da vaga (LETRA + numero de 0 a 15, ex: A7):  ///\n");
     char codigo[3];
     scanf("%s", codigo);
+    getchar();
     printf("///            Tipo da vaga (carro, moto, etc.): ");
     char tipo[20];
     scanf("%s", tipo);
@@ -72,30 +73,63 @@ void tela_criar_vaga(void) {
     // Verifique se o codigo da vaga segue o padrão especificado 
     if ((codigo[0] >= 'A' && codigo[0] <= 'Z') &&
         (codigo[1] >= '0' && codigo[1] <= '9') && codigo[2] == '\0' &&
-        (codigo[1] - '0' >= 0 && codigo[1] - '0' <= 15)) {
+        (codigo[1] - '0' >= 0 && codigo[1] - '0' <= 15)){
         
-        FILE *arquivo = fopen("vagas.dat", "ab");
-
-        if (arquivo == NULL) {
-            printf("Erro ao abrir o arquivo.\n");
-            printf("\t\t>>> Tecle <ENTER> para continuar...\n");
-            getchar();
-            return;
-        }
-
         struct Vaga vaga;
         
-        strcpy(vaga.codigo, codigo);
-        strcpy(vaga.tipo, tipo);
+        FILE *arquivo = fopen("vagas.dat", "rb");
 
-        fwrite(&vaga, sizeof(struct Vaga), 1, arquivo);
+        if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+        return;
+        }
+
+        int vaga_existente = 0;
+
+        while (fread(&vaga, sizeof(struct Vaga), 1, arquivo) == 1) {
+    
+        // Verificar se a vaga já existe
+        if (strcmp(vaga.codigo, codigo) == 0) {
+            // A vaga já existe
+            vaga_existente = 1;
+            break;
+        }
+        }
 
         fclose(arquivo);
 
-        printf("Vaga cadastrada com sucesso!\n");
+        if (vaga_existente) {
+        printf("Vaga já existe.\n");
+        getchar();
+        return;
+        } else {
+        
+            FILE *arquivo = fopen("vagas.dat", "ab");
+
+            if (arquivo == NULL) {
+                printf("Erro ao abrir o arquivo.\n");
+                printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+                getchar();
+                return;
+            }
+            
+            struct Vaga vaga;
+            
+            strcpy(vaga.codigo, codigo);
+            strcpy(vaga.tipo, tipo);
+
+            fwrite(&vaga, sizeof(struct Vaga), 1, arquivo);
+
+            fclose(arquivo);
+
+            printf("Vaga cadastrada com sucesso!\n");
+            return;
+        }
 
     } else {
-        printf("codigo da vaga invalido. Deve ser uma letra seguida por um numero de 0 a 15.\n");
+        printf("Codigo da vaga invalido. Deve ser uma letra maiuscula seguida por um numero de 0 a 15.\n");
     }
 
     printf("\t\t>>> Tecle <ENTER> para continuar...\n");
@@ -113,6 +147,7 @@ void tela_editar_vaga(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe o codigo da vaga a ser editada: ");
     scanf("%s", codigo);
+    getchar();
     getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -144,8 +179,10 @@ void tela_editar_vaga(void) {
                 printf("///\n");
                 printf("///     Novo codigo: ");
                 scanf("%s", vaga.codigo);
+                getchar();
                 printf("///     Novo Tipo: ");
                 scanf("%s", vaga.tipo);
+                getchar();
                 printf("///\n");
                 printf("///////////////////////////////////////////////////////////////////////////////\n");
                 printf("\n");
@@ -184,6 +221,7 @@ void tela_excluir_vaga(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe o codigo da vaga a ser excluida : ");
     scanf("%s", codigo);
+    getchar();
     getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -253,6 +291,7 @@ void tela_visualizar_vaga(void) {
     printf("///                                                                         ///\n");
     printf("///            Informe o codigo da vaga a ser visualizada : ");
     scanf("%s", codigo);
+    getchar();
     getchar();
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
