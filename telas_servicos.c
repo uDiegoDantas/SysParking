@@ -64,8 +64,6 @@ struct Servicos{
 
 void tela_checkin(void){
 
-    char codigo[3];
-
     struct Servicos servico;
 
     system("clear||cls");
