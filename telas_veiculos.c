@@ -57,14 +57,14 @@ void tela_menu_veiculos(void) {
 struct Veiculo {
     char placa[10];
     char proprietario[50];
-    int ano;
+    char ano[4];
     char porte[20];
 };
 
 void tela_cadastrar_veiculo(void) {
     char placa[10];
     char proprietario[50];
-    int ano;
+    char ano[4];
     char porte[20];
 
     system("clear||cls");
@@ -80,7 +80,7 @@ void tela_cadastrar_veiculo(void) {
     scanf("%s", proprietario);
     getchar();
     printf("///            Ano do veiculo (aaaa): ");
-    scanf("%d", &ano);
+    scanf("%s", ano);
     getchar();
     printf("///            Porte(Carro, moto, etc): ");
     scanf("%s", porte);
@@ -152,7 +152,7 @@ void tela_visualizar_veiculo(void) {
             printf("///                                                                         ///\n");
             printf("///     Placa: %s\n", veiculo.placa);
             printf("///     Proprietario: %s\n", veiculo.proprietario);
-            printf("///     Ano: %d\n", veiculo.ano);
+            printf("///     Ano: %s\n", veiculo.ano);
             printf("///     Porte: %s\n", veiculo.porte);
             printf("///                                                                         ///\n");
             printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -213,7 +213,7 @@ void tela_alterar_veiculo(void) {
             printf("///                                                                         ///\n");
             printf("///     Placa: %s\n", veiculo.placa);
             printf("///     Proprietario: %s\n", veiculo.proprietario);
-            printf("///     Ano: %d\n", veiculo.ano);
+            printf("///     Ano: %s\n", veiculo.ano);
             printf("///     Porte: %s\n", veiculo.porte);
             printf("///\n");
             printf("///     Nova Placa: ");
@@ -223,7 +223,7 @@ void tela_alterar_veiculo(void) {
             scanf("%s", veiculo.proprietario);
             getchar();
             printf("///     Novo Ano: ");
-            scanf("%d", &veiculo.ano);
+            scanf("%s", veiculo.ano);
             getchar();
             printf("///     Novo Porte: ");
             scanf("%s", veiculo.porte);
@@ -339,7 +339,7 @@ void listar_veiculos(void) {
     while (fread(&veiculo, sizeof(struct Veiculo), 1, arquivo) == 1){
         printf("///     Placa: %s\n", veiculo.placa);
         printf("///     Proprietario: %s\n", veiculo.proprietario);
-        printf("///     Ano: %d\n", veiculo.ano);
+        printf("///     Ano: %s\n", veiculo.ano);
         printf("///     Porte: %s\n", veiculo.porte);
         printf("///\n");
     }
