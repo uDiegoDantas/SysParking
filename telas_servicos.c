@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h> 
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -21,6 +21,7 @@ void tela_menu_servicos(void){
     printf("///            2. Chek-out                                                  ///\n");
     printf("///            3. Listar Chek-in's                                          ///\n");
     printf("///            4. Editar Chek-in                                            ///\n");
+    printf("///            5. Historico de check-in's                                   ///\n");
     printf("///            0. Voltar ao menu anterior                                   ///\n");
     printf("///                                                                         ///\n");
     printf("///////////////////////////////////////////////////////////////////////////////\n");
@@ -41,6 +42,9 @@ void tela_menu_servicos(void){
             break;
         case '4':
             editar_checkin();
+            break;
+        case '5':
+            listar_checkouts();
             break;
         case '0':
             return;
@@ -68,6 +72,8 @@ struct Servicos{
     char data[11];
     char horario[6];
     char nomeCliente[50];
+    char horarioCheckout[6];
+    char dataCheckout[11];
 };
 
 struct Clientes {
@@ -267,11 +273,16 @@ void listar_checkins(void){
     }
 
     printf("///\n");
-    printf("///     Placa | Codigo | CPF | Data | Horario | Nome do Cliente\n");
 
     while (fread(&servico, sizeof(struct Servicos), 1, arquivo_servicos) == 1) {
         printf("///\n");
-        printf("///     %s | %s | %s | %s | %s | %s\n", servico.placa, servico.codigo, servico.cpf, servico.data, servico.horario, servico.nomeCliente);
+        printf("///     Codigo da vaga: %s\n", servico.codigo);
+        printf("///     Placa do veiculo: %s\n", servico.placa);
+        printf("///     CPF do cliente: %s\n", servico.cpf);
+        printf("///     Nome do cliente: %s\n", servico.nomeCliente);
+        printf("///     Data do check-in: %s\n", servico.data);
+        printf("///     Horario do check-in: %s\n", servico.horario);
+        
     }
 
     fclose(arquivo_servicos);
@@ -298,6 +309,7 @@ void tela_checkout(void){
     getchar();
 
     FILE *arquivo_servicos = fopen("servicos.dat", "r+b");
+    FILE *arquivo_historico = fopen("historico.dat", "a+b");
 
     if (arquivo_servicos == NULL) {
         printf("Erro ao abrir o arquivo!");
@@ -315,13 +327,13 @@ void tela_checkout(void){
         return;
     }
 
-    int check_out_realizado = 0;
+    int check_in_realizado = 0;
     struct Servicos servico;
 
     while (fread(&servico, sizeof(struct Servicos), 1, arquivo_servicos) == 1) {
         if (strcmp(codigo, servico.codigo) == 0) {
             // Registro encontrado, não copie para o arquivo temporário
-            check_out_realizado = 1;
+            check_in_realizado = 1;
         } else {
             // Registro não é o que estamos procurando, copie para o arquivo temporário
             fwrite(&servico, sizeof(struct Servicos), 1, arquivo_temporario);
@@ -331,8 +343,25 @@ void tela_checkout(void){
     fclose(arquivo_servicos);
     fclose(arquivo_temporario);
 
-    if (check_out_realizado) {
+    //Pegar a hora e data do checkout
+
+    // Obter a hora atual
+    time_t agora = time(NULL);
+    struct tm *data_hora = localtime(&agora);
+
+    // Armazena a hora e os minutos na variável 
+    strftime(servico.horarioCheckout, sizeof(servico.horarioCheckout), "%H:%M", data_hora);
+
+    // Obter a data atual
+    
+    struct tm *data_atual = localtime(&agora);
+
+    // Armazena a data atual na variável "data"
+    strftime(servico.dataCheckout, sizeof(servico.dataCheckout), "%d/%m/%Y", data_atual);
+
+    if (check_in_realizado) {
         // Substitui o arquivo original pelo temporário
+        fwrite(&servico, sizeof(struct Servicos), 1, arquivo_historico);
         remove("servicos.dat");
         rename("temporario.dat", "servicos.dat");
         printf("Check-out realizado com sucesso!\n");
@@ -342,8 +371,15 @@ void tela_checkout(void){
         remove("temporario.dat");
     }
 
+    fclose(arquivo_servicos);
+    fclose(arquivo_historico);
+
     printf("\t\t>>> Tecle <ENTER> para continuar...\n");
     getchar();
+
+    printf("///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
 }
 
 void editar_checkin(void){
@@ -440,4 +476,49 @@ int existeCheckin(const char *placa, const char *codigo, const char *cpf){
 
     fclose(arquivo_servicos);
     return 0; // Não encontrou um check-in com esses dados
+}
+
+void listar_checkouts(void){
+
+    system("clear||cls");
+    printf("\n");
+    printf("///////////////////////////////////////////////////////////////////////////////////////////////////////////\n");
+    printf("///                                                                                                     ///\n");
+    printf("///                         = = = = = = = = Listar Check-out's  = = = = = = = =                         ///\n");
+    printf("///                                                                                                     ///\n");
+
+    FILE *arquivo_historico = fopen("historico.dat", "rb");
+
+    struct Servicos servico;
+    
+    if (arquivo_historico == NULL) {
+        printf("Erro ao abrir o arquivo!");
+        printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+        return;
+    }
+
+    printf("///\n");
+    
+
+    while (fread(&servico, sizeof(struct Servicos), 1, arquivo_historico) == 1) {
+        printf("///\n");
+        printf("///     Codigo da vaga: %s\n", servico.codigo);
+        printf("///     Placa do veiculo: %s\n", servico.placa);
+        printf("///     CPF do cliente: %s\n", servico.cpf);
+        printf("///     Nome do cliente: %s\n", servico.nomeCliente);
+        printf("///     Data do check-in: %s\n", servico.data);
+        printf("///     Horario do check-in: %s\n", servico.horario);
+        printf("///     Data do check-out: %s\n", servico.dataCheckout);
+        printf("///     Horario do checkout: %s\n", servico.horarioCheckout);
+    }
+
+    fclose(arquivo_historico);
+
+    printf("///                                                                                                     ///\n");
+    printf("///////////////////////////////////////////////////////////////////////////////////////////////////////////\n");
+    printf("\n");
+    printf(">>> Tecle <ENTER> para continuar...\n");
+    getchar();
+    return;
 }

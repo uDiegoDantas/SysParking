@@ -57,7 +57,7 @@ void tela_menu_veiculos(void) {
 struct Veiculo {
     char placa[10];
     char proprietario[50];
-    char ano[4];
+    char ano[6];
     char porte[20];
 };
 

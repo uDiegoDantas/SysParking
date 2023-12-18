@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "telas_clientes.h"
+#include "verificadores.c"
 
 void tela_menu_cliente(void) {
     char op;
@@ -72,6 +73,13 @@ void tela_cadastrar_cliente(void) {
     printf("///            CPF: ");
     scanf("%s", cliente.cpf);
     getchar();
+    // Verifica se o CPF já está cadastrado
+    if (existe_cpf(cliente.cpf)) {
+        printf("CPF ja cadastrado.\n");
+        printf("\t\t>>> Tecle <ENTER> para continuar...\n");
+        getchar();
+        return;
+    }
     printf("///            Telefone: ");
     scanf("%s", cliente.telefone);
     getchar();

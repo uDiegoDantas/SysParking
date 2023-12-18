@@ -102,7 +102,7 @@ void tela_criar_vaga(void) {
         fclose(arquivo);
 
         if (vaga_existente) {
-        printf("Vaga já existe.\n");
+        printf("O codigo da vaga ja esta cadastrado.\n");
         getchar();
         return;
         } else {
@@ -126,6 +126,7 @@ void tela_criar_vaga(void) {
             fclose(arquivo);
 
             printf("Vaga cadastrada com sucesso!\n");
+            getchar();
             return;
         }
 
