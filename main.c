@@ -7,6 +7,7 @@
 #include "telas_veiculos.h"
 #include "telas_info.h"
 #include "telas_servicos.h"
+#include "verificadores.h"
 
 // Assinatura da tela do menu principal
 void tela_menu_principal(void);
