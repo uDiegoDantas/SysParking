@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "telas_clientes.h"
-#include "verificadores.c"
+#include "verificadores.h"
 
 void tela_menu_cliente(void) {
     char op;
