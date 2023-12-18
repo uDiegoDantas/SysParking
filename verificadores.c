@@ -10,8 +10,6 @@ struct Clientes2{
     char telefone[15];
 };
 
-
-
 int existe_cpf(const char *cpf){
     FILE *arquivo_clientes = fopen("clientes.dat", "rb");
 
